@@ -14,7 +14,41 @@
       // Function to extract the access token from the URL
       function getAccessToken() {
           const urlParams = new URLSearchParams(window.location.search);
-          return urlParams.get('access_token');
+          return urlParams.get("code");
+
+          if(code) {
+            const tokenEndpoint = "https://account.spotify.com/api/token";
+            const client_secret = "2d5a82decbc240e4adadcbd86f342321";
+            const basicAuthHeader = (`e9fec6e1cb5241e0a41ab98db146bc3c:${client_secret}`);
+
+            const data = {
+                grant_type: "authorization_code",
+                code: code,
+                redirect_uri: redirect_uri,
+            };
+
+            fetch(tokenEndpoint, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Basic ${basicAuthHeader}`,
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams(data),
+            })
+
+            .then((response) => response.json())
+            .then((tokenData) => {
+                const access_token = tokenData.access_token;
+                //Use the access token to get the user's data
+                fetch("https://api.spotify.com/v1/me", {
+                     headers: {
+                           "Authorization": `Bearer ${access_token}`,
+                     },
+                })
+                return access_token;
+            })
+
+          }
       }
 
       // Fetch data from Spotify API
