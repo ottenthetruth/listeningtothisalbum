@@ -14,7 +14,7 @@
     <script>
         getCurrentlyPlaying();
 
-        function getAccessToken() {
+        async function getAccessToken() {
             const urlParams = new URLSearchParams(window.location.search);
               const code = urlParams.get("code");
             if (code) {
@@ -52,7 +52,7 @@
 
 } /* end getAccessToken */
 
-        async function getCurrentlyPlaying() {
+        function getCurrentlyPlaying() {
             const accessToken = await getAccessToken();
 
             if (accessToken) {
