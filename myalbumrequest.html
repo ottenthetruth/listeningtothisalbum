@@ -42,8 +42,12 @@
             });
 
             if (response.status === 200) {
-                const tokenData = await response.json();
-                return tokenData.access_token;
+            const tokenData = await response.json();
+            const accessToken = tokenData.access_token;
+
+            localStorage.setItem("access_token", accessToken);
+
+            return accessToken;
             } else {
                 console.error("Failed to obtain access token.");
                 return null;
