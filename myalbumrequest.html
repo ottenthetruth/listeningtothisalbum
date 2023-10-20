@@ -80,7 +80,7 @@
 
 async function getCurrentlyPlayingAccessToken() {
             const accessToken = localStorage.getItem("access_token");
-/*if (accessToken) {
+if (accessToken) {
         const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
             method: 'GET',
             headers: {
@@ -96,7 +96,7 @@ async function getCurrentlyPlayingAccessToken() {
             document.getElementById('currently-playing').textContent = 'Not currently playing anything on Spotify.';
         }
     }
-*/
+
 }
       getCurrentlyPlaying();
 </script>
