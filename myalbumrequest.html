@@ -14,7 +14,7 @@
     <script>
         getCurrentlyPlaying();
 
-        function getAccessToken(const mycode) {
+        function getAccessToken() {
             const urlParams = new URLSearchParams(window.location.search);
               const code = urlParams.get("code");
             if (code) {
