@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currently Playing</title>
+</head>
+<body>
+    <h1>Currently Playing on Spotify:</h1>
+    <div id="currently-playing">
+        <p>Album Name: <span id="album-name"></span></p>
+        <p>Artist Name: <span id="artist-name"></span></p>
+    </div>
+
+
+
+
+
+
+    <script>
+
+
+
+        // Fetch data from Spotify API
+        async function getCurrentlyPlaying() {
+            const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your access token
+                },
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                document.getElementById('album-name').textContent = data.item.album.name;
+                document.getElementById('artist-name').textContent = data.item.artists[0].name;
+            } else {
+                document.getElementById('currently-playing').textContent = 'Not currently playing anything on Spotify.';
+            }
+        }
+
+        getCurrentlyPlaying();
+    </script>
+</body>
+</html>
