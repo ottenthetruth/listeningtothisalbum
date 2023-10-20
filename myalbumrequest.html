@@ -99,11 +99,21 @@ if (accessToken) {
 
         if (response.status === 200) {
             const data = await response.json();
-            document.getElementById('album-name').textContent = data.item.album.name;
-            document.getElementById('artist-name').textContent = data.item.artists[0].name;
+            const albumName = data.item.album.name;
+            const artistName = data.item.artists[0].name;
+            const albumCoverUrl = data.item.album.images[0].url; // Assuming you want the first image in the album
+
+            document.getElementById('album-name').textContent = albumName;
+            document.getElementById('artist-name').textContent = artistName;
+
+            const albumCoverElement = document.getElementById('album-cover');
+            albumCoverElement.src = albumCoverUrl;
+            albumCoverElement.alt = `${albumName} Album Cover`;
         } else {
             document.getElementById('currently-playing').textContent = 'Not currently playing anything on Spotify.';
         }
+    } else {
+        getCurrentlyPlayingAccessToken();
     }
 
 }
