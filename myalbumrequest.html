@@ -52,7 +52,7 @@
 
 } /* end getAccessToken */
 
-        function getCurrentlyPlaying() {
+        async function getCurrentlyPlaying() {
             const accessToken = await getAccessToken();
 
             if (accessToken) {
