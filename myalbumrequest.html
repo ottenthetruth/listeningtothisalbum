@@ -39,18 +39,11 @@
             .then((response) => response.json())
             .then((tokenData) => {
                 const access_token = tokenData.access_token;
-                //Use the access token to get the user's data
-                fetch("https://api.spotify.com/v1/me", {
-                     headers: {
-                           "Authorization": `Bearer ${access_token}`,
-                     },
-                })
                 return access_token;
             })
 
           }
       }
-
       // Fetch data from Spotify API
       async function getCurrentlyPlaying() {
           const accessToken = getAccessToken();
